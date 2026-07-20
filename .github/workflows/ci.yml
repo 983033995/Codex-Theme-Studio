@@ -1,0 +1,22 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: studio-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  macos:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v6
+      - name: Test
+        run: ./scripts/test.sh
+      - name: Build unsigned app bundle
+        run: ./scripts/build-app.sh "$RUNNER_TEMP/Codex Theme Studio.app"

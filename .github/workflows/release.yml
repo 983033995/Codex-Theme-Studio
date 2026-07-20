@@ -1,0 +1,27 @@
+name: Release macOS App
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: macos-15
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v6
+      - name: Verify version
+        run: test "v$(tr -d '\r\n' < VERSION)" = "$GITHUB_REF_NAME"
+      - name: Test and build
+        run: ./scripts/build-app.sh "$RUNNER_TEMP/Codex Theme Studio.app"
+      - name: Package
+        run: |
+          archive="Codex-Theme-Studio-${GITHUB_REF_NAME}-macOS.zip"
+          /usr/bin/ditto -c -k --sequesterRsrc --keepParent "$RUNNER_TEMP/Codex Theme Studio.app" "$archive"
+          shasum -a 256 "$archive" > "$archive.sha256"
+      - name: Create GitHub Release
+        run: gh release create "$GITHUB_REF_NAME" Codex-Theme-Studio-*.zip Codex-Theme-Studio-*.sha256 --generate-notes --verify-tag

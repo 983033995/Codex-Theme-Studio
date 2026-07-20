@@ -1,0 +1,7 @@
+.DS_Store
+.codegraph/
+app/.build/
+dist/
+release/
+*.zip
+*.sha256
