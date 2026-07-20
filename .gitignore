@@ -3,5 +3,8 @@
 app/.build/
 dist/
 release/
+tmp/
+docs/images/qa/
+design-qa.md
 *.zip
 *.sha256
