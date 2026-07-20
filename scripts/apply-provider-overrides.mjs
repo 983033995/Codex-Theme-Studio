@@ -24,6 +24,10 @@ const projectBagExpandedPath = join(
   "assets",
   "fortune-project-bag-expanded.png"
 );
+const actionCostPath = join(root, "provider-overrides", "assets", "fortune-action-cost.png");
+const actionDebtPath = join(root, "provider-overrides", "assets", "fortune-action-debt.png");
+const actionReportPath = join(root, "provider-overrides", "assets", "fortune-action-report.png");
+const actionMergePath = join(root, "provider-overrides", "assets", "fortune-action-merge.png");
 const cssMarkers = {
   begin: "/* CODEX THEME STUDIO: fortune-coder-sidebar-hover BEGIN */",
   end: "/* CODEX THEME STUDIO: fortune-coder-sidebar-hover END */"
@@ -61,7 +65,11 @@ async function assetReplacements() {
     ["__FORTUNE_HERO_CUTOUT_DATA_URL__", await imageDataURL(heroCutoutPath)],
     ["__FORTUNE_HERO_PARCHMENT_DATA_URL__", await imageDataURL(heroParchmentPath)],
     ["__FORTUNE_PROJECT_BAG_COLLAPSED_DATA_URL__", await imageDataURL(projectBagCollapsedPath)],
-    ["__FORTUNE_PROJECT_BAG_EXPANDED_DATA_URL__", await imageDataURL(projectBagExpandedPath)]
+    ["__FORTUNE_PROJECT_BAG_EXPANDED_DATA_URL__", await imageDataURL(projectBagExpandedPath)],
+    ["__FORTUNE_ACTION_COST_DATA_URL__", await imageDataURL(actionCostPath)],
+    ["__FORTUNE_ACTION_DEBT_DATA_URL__", await imageDataURL(actionDebtPath)],
+    ["__FORTUNE_ACTION_REPORT_DATA_URL__", await imageDataURL(actionReportPath)],
+    ["__FORTUNE_ACTION_MERGE_DATA_URL__", await imageDataURL(actionMergePath)]
   ]);
 }
 
@@ -85,6 +93,11 @@ async function loadOverride(replacements) {
     "--dream-fortune-safe-right",
     "data-dream-fortune-content-open",
     "dream-fortune-home-dashboard",
+    "@container home-main-content (max-width: 820px)",
+    "grid-template-columns: repeat(2, minmax(0, 1fr))",
+    "dream-fortune-action-label",
+    "dream-fortune-action-arrow",
+    "word-break: keep-all",
     "data-dream-fortune-project-bag",
     "dream-fortune-project-bag-icon",
     "[role=\"listitem\"]"
@@ -107,6 +120,7 @@ async function loadJavaScriptOverride(replacements) {
     "--dream-fortune-safe-right",
     "dreamFortuneContentOpen",
     "dream-fortune-home-dashboard",
+    "data-global-icon-source",
     "syncProjectBagIcons",
     "hydrateDashboardIcons",
     "aria-pressed",
@@ -128,6 +142,22 @@ async function loadJavaScriptOverride(replacements) {
     [
       "__FORTUNE_PROJECT_BAG_EXPANDED_DATA_URL__",
       replacements.get("__FORTUNE_PROJECT_BAG_EXPANDED_DATA_URL__")
+    ],
+    [
+      "__FORTUNE_ACTION_COST_DATA_URL__",
+      replacements.get("__FORTUNE_ACTION_COST_DATA_URL__")
+    ],
+    [
+      "__FORTUNE_ACTION_DEBT_DATA_URL__",
+      replacements.get("__FORTUNE_ACTION_DEBT_DATA_URL__")
+    ],
+    [
+      "__FORTUNE_ACTION_REPORT_DATA_URL__",
+      replacements.get("__FORTUNE_ACTION_REPORT_DATA_URL__")
+    ],
+    [
+      "__FORTUNE_ACTION_MERGE_DATA_URL__",
+      replacements.get("__FORTUNE_ACTION_MERGE_DATA_URL__")
     ]
   ]));
 }

@@ -21,11 +21,17 @@
 - 右侧文件、差异或输出面板打开时自动隐藏招财进宝盆。
 - 优化首页图标、输入区位置、侧边栏 hover 和项目标题样式。
 - 修复 Theme Studio 重复进程与旧登录项迁移问题。
-# 0.3.1
+## 0.3.2 - 2026-07-20
+
+- 修复项目文件或右侧任务面板打开时，财神首页四张能力卡被压成逐字竖排的问题。
+- 按 Gallery 正式预览图补充卡片状态签、前进按钮及两列/单列容器响应式布局。
+- 新增金元宝、翡翠账簿、朱砂财报卷轴和合并吉符四枚财神主题功能图标。
+
+## 0.3.1 - 2026-07-20
 
 - Refresh the configured Gallery registry once at startup so a first-time installation can discover community themes without a manual refresh.
 
-# 0.3.0
+## 0.3.0 - 2026-07-20
 
 - Split community themes, pets, schemas, stats, and reusable theme skills into `Codex-Theme-Gallery`.
 - Configure the official Gallery registry URL as the default community source.

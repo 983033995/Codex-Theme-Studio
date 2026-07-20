@@ -110,6 +110,14 @@
       const icon = sidebarIcon(slot.dataset.iconSource);
       if (icon) slot.appendChild(icon);
     }
+    for (const slot of dashboard.querySelectorAll("[data-global-icon-source]")) {
+      if (slot.querySelector("svg")) continue;
+      const label = slot.dataset.globalIconSource;
+      const control = [...document.querySelectorAll("[aria-label]")]
+        .find((element) => element.getAttribute("aria-label") === label);
+      const icon = control?.querySelector("svg")?.cloneNode(true);
+      if (icon) slot.appendChild(icon);
+    }
   }
 
   function fillHomeComposer(home, prompt) {
@@ -185,20 +193,28 @@
       </div>
       <div class="dream-fortune-home-actions">
         <button type="button" data-dream-fortune-prompt="分析当前项目的高成本代码路径，给出可执行的性能与资源降本方案，并按优先级排序。">
-          <span class="dream-fortune-action-icon" data-icon-source="已安排"></span>
+          <span class="dream-fortune-action-icon"><img src="__FORTUNE_ACTION_COST_DATA_URL__" alt="" draggable="false"></span>
           <span><b>成本优化</b><small>定位高成本路径，给出降本方案</small></span>
+          <span class="dream-fortune-action-label">资源尽赚</span>
+          <span class="dream-fortune-action-arrow" data-global-icon-source="前进" aria-hidden="true"></span>
         </button>
         <button type="button" data-dream-fortune-prompt="扫描当前项目的技术债、复杂度、过期依赖和待办项，整理成可分批执行的清账计划。">
-          <span class="dream-fortune-action-icon" data-icon-source="插件"></span>
+          <span class="dream-fortune-action-icon"><img src="__FORTUNE_ACTION_DEBT_DATA_URL__" alt="" draggable="false"></span>
           <span><b>技术债清账</b><small>扫描债务，一键整理改造计划</small></span>
+          <span class="dream-fortune-action-label">债务还清</span>
+          <span class="dream-fortune-action-arrow" data-global-icon-source="前进" aria-hidden="true"></span>
         </button>
         <button type="button" data-dream-fortune-prompt="总结当前项目最近的代码变更、已完成事项、风险和下一步，生成一份简洁的项目进展报告。">
-          <span class="dream-fortune-action-icon" data-icon-source="站点"></span>
+          <span class="dream-fortune-action-icon"><img src="__FORTUNE_ACTION_REPORT_DATA_URL__" alt="" draggable="false"></span>
           <span><b>自动报表总结</b><small>汇总变更、风险与下一步</small></span>
+          <span class="dream-fortune-action-label">汇报不加班</span>
+          <span class="dream-fortune-action-arrow" data-global-icon-source="前进" aria-hidden="true"></span>
         </button>
         <button type="button" data-dream-fortune-prompt="检查当前分支的潜在合并冲突，解释冲突原因，并给出安全的解决与验证步骤。">
-          <span class="dream-fortune-action-icon" data-icon-source="拉取请求"></span>
+          <span class="dream-fortune-action-icon"><img src="__FORTUNE_ACTION_MERGE_DATA_URL__" alt="" draggable="false"></span>
           <span><b>冲突合并开运</b><small>识别冲突，给出安全合并方案</small></span>
+          <span class="dream-fortune-action-label">合并开红</span>
+          <span class="dream-fortune-action-arrow" data-global-icon-source="前进" aria-hidden="true"></span>
         </button>
       </div>`;
 
