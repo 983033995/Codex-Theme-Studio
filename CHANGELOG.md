@@ -21,6 +21,10 @@
 - 右侧文件、差异或输出面板打开时自动隐藏招财进宝盆。
 - 优化首页图标、输入区位置、侧边栏 hover 和项目标题样式。
 - 修复 Theme Studio 重复进程与旧登录项迁移问题。
+# 0.3.1
+
+- Refresh the configured Gallery registry once at startup so a first-time installation can discover community themes without a manual refresh.
+
 # 0.3.0
 
 - Split community themes, pets, schemas, stats, and reusable theme skills into `Codex-Theme-Gallery`.

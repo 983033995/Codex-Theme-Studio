@@ -48,6 +48,7 @@ final class AppModel: ObservableObject {
     loginEnabled = SMAppService.mainApp.status == .enabled
     reloadLibraries()
     monitorTask = Task { [weak self] in
+      await self?.refreshCommunityIfConfigured()
       await self?.refreshAll(deep: true)
       await self?.autoRepairIfNeeded()
       while !Task.isCancelled {
@@ -137,6 +138,17 @@ final class AppModel: ObservableObject {
         reloadLibraries()
         show(message: "社区主题与宠物列表已更新。")
       }
+    }
+  }
+
+  private func refreshCommunityIfConfigured() async {
+    let source = registryURL.trimmingCharacters(in: .whitespacesAndNewlines)
+    guard !source.isEmpty else { return }
+    do {
+      remoteRegistry = try await registry.fetch(from: source)
+      reloadLibraries()
+    } catch {
+      // Startup stays usable with bundled/local content; manual refresh reports errors.
     }
   }
 
