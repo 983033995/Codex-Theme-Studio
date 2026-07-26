@@ -20,3 +20,12 @@ jobs:
         run: ./scripts/test.sh
       - name: Build unsigned app bundle
         run: ./scripts/build-app.sh "$RUNNER_TEMP/Codex Theme Studio.app"
+  pr-title:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Validate conventional PR title
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
+        run: node scripts/validate-pr-title.mjs "$PR_TITLE"

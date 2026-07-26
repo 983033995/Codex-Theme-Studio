@@ -1,0 +1,27 @@
+name: App 问题报告
+description: 报告 Theme Studio 的安装、切换、社区列表或收藏统计异常
+title: "fix(app): "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: "请勿粘贴访问令牌、日志中的用户内容或私有 Registry 地址。"
+  - type: dropdown
+    id: area
+    attributes:
+      label: 影响范围
+      options: ["App 启动", "主题切换", "宠物画廊", "社区 Registry", "下载/收藏统计", "发布流水线"]
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: 复现步骤与实际结果
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 预期结果
+    validations:
+      required: true
