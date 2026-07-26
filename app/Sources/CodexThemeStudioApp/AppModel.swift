@@ -290,6 +290,14 @@ final class AppModel: ObservableObject {
     NSWorkspace.shared.open(repositoryURL)
   }
 
+  func favorite(_ pet: PetItem) {
+    guard let issueURL = pet.remote?.statsIssueURL else {
+      show(message: "该宠物尚未发布可收藏的社区页面。")
+      return
+    }
+    NSWorkspace.shared.open(issueURL)
+  }
+
   func updateLoginItem(_ enabled: Bool) {
     do {
       if enabled {

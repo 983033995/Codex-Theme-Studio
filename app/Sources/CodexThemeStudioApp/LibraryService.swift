@@ -120,20 +120,32 @@ struct LibraryService {
 
   func mergePets(installed: [PetItem], remote: [RegistryPet]) -> [PetItem] {
     var table = Dictionary(uniqueKeysWithValues: installed.map { ($0.id, $0) })
-    for pet in remote where table[pet.id] == nil {
-      table[pet.id] = PetItem(
-        id: pet.id,
-        name: pet.name,
-        detail: communityDetail(
-          summary: pet.summary,
-          sharedBy: pet.sharedBy,
-          stats: pet.stats,
-          fallback: "社区宠物"
-        ),
-        spritesheetURL: pet.previewURL,
-        directoryURL: nil,
-        remote: pet
-      )
+    for pet in remote {
+      if let local = table[pet.id] {
+        // 已安装副本继续使用本地资源，但保留社区统计与收藏入口。
+        table[pet.id] = PetItem(
+          id: local.id,
+          name: local.name,
+          detail: local.detail,
+          spritesheetURL: local.spritesheetURL,
+          directoryURL: local.directoryURL,
+          remote: pet
+        )
+      } else {
+        table[pet.id] = PetItem(
+          id: pet.id,
+          name: pet.name,
+          detail: communityDetail(
+            summary: pet.summary,
+            sharedBy: pet.sharedBy,
+            stats: pet.stats,
+            fallback: "社区宠物"
+          ),
+          spritesheetURL: pet.previewURL,
+          directoryURL: nil,
+          remote: pet
+        )
+      }
     }
     return table.values.sorted { left, right in
       if left.isInstalled != right.isInstalled { return left.isInstalled }
