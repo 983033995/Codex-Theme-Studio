@@ -212,7 +212,8 @@ struct ThemeStudioPanel: View {
               pet: pet,
               selected: model.selectedPet?.id == pet.id,
               select: { model.selectedPetID = pet.id },
-              install: { model.installSelectedPet() }
+              install: { model.installSelectedPet() },
+              favorite: { model.favorite(pet) }
             )
           }
         }
@@ -423,6 +424,7 @@ private struct PetLibraryRow: View {
   let selected: Bool
   let select: () -> Void
   let install: () -> Void
+  let favorite: () -> Void
   @State private var hovering = false
 
   var body: some View {
@@ -440,6 +442,22 @@ private struct PetLibraryRow: View {
             .font(.system(size: 12.5))
             .foregroundStyle(PanelPalette.muted)
             .lineLimit(2)
+          if let stats = pet.remote?.stats {
+            HStack(spacing: 7) {
+              Label("\(stats.downloads)", systemImage: "arrow.down.circle")
+              Label("\(stats.favorites)", systemImage: "star")
+              if pet.remote?.statsIssueURL != nil {
+                Button(action: favorite) {
+                  Label("收藏", systemImage: "heart")
+                }
+                .buttonStyle(.plain)
+                .foregroundStyle(PanelPalette.accent)
+                .help("在 GitHub 收藏页添加 ❤️ 或 👍")
+              }
+            }
+            .font(.system(size: 10.5, weight: .medium))
+            .foregroundStyle(PanelPalette.muted)
+          }
         }
         Spacer()
         if pet.isInstalled {
