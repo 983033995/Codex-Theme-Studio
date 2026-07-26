@@ -1,0 +1,24 @@
+name: 功能建议
+description: 提议可审核的 Theme Studio 功能或 Gallery 体验改进
+title: "feat(app): "
+labels: ["enhancement", "triage"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: 要解决的问题
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: 建议方案与用户价值
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: 安全检查
+      options:
+        - label: "该建议不会要求提交凭证、用户数据或私有 Registry。"
+          required: true

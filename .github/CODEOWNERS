@@ -1,0 +1,5 @@
+# App 运行时、发布与 Provider 注入均需维护者审核。
+/app/ @983033995
+/scripts/ @983033995
+/.github/ @983033995
+/provider-overrides/ @983033995
